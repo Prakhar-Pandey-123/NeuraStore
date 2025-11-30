@@ -1,19 +1,39 @@
-import { Button } from "./components/ui/Button"
-import { PlusIcon } from "./icons/PlusIcon"
-import { ShareIcon } from "./icons/ShareIcon"
+
+import { useEffect } from "react";
+
+import { Signup } from "./pages/Signup";
+import { BrowserRouter, Routes,Route } from "react-router-dom";
+import { Signin } from "./pages/Signin";
+import { useContent } from "./hooks/useContent";
 
 
+import { Dashboard } from "./pages/Dashboard";
 function App() {
+  const {refresh}=useContent()
+
+  useEffect(() => {
+  const script = document.createElement("script");
+  script.src = "https://platform.twitter.com/widgets.js";
+  script.async = true;
+  document.body.appendChild(script);
+}, []);
+
+// useEffect(()=>{
+//   refresh()
+// },[])
   
   return(
-    <>
-    <Button title="share" size="md" startIcon={<PlusIcon size="md"></PlusIcon>} endIcon={ <ShareIcon size="md"></ShareIcon>} variant="primary"></Button>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/signup" element={<Signup/>}></Route>
+      <Route path="/signin" element={<Signin/>}></Route>
+      <Route path="/dashboard" element={<Dashboard/>}></Route>
 
-     <Button title="add content" size="lg" startIcon={<PlusIcon size="lg"></PlusIcon>} endIcon={<ShareIcon size="lg"></ShareIcon>} variant="secondary"></Button>
+    </Routes>
+   
 
-     <Button title="add content" size="sm" variant="primary" startIcon={<PlusIcon size="sm"></PlusIcon>} endIcon={<ShareIcon size="sm"></ShareIcon>} ></Button>
-
-    </>
+    </BrowserRouter>
+    
   )
 }
 

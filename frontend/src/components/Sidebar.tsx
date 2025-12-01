@@ -5,7 +5,7 @@ import { Button } from "./Button"
 import { SidebarItem } from "./SidebarItem"
 import { useNavigate } from "react-router-dom"
 import { useContent } from "../hooks/useContent"
-import { useEffect } from "react"
+import { Github } from "../icons/Github"
 
 interface SidebarProps{
     show:string
@@ -46,8 +46,17 @@ export function Sidebar({show,setShow}:SidebarProps){
                  <SidebarItem text="Twitter" icon={<TwitterIcon/>}></SidebarItem>
                
                </button>
+
                <button onClick={()=>clicked("youtube")} className={`${show==="youtube"?"bg-gray-200 w-[192px] rounded-md":""} cursor-pointer` }>
                 <SidebarItem text="Youtube" icon={<YoutubeIcon/>}></SidebarItem>
+
+               </button>
+
+               <button onClick={()=>clicked("github")} className={`${
+                show==="github"?"bg-gray-200 w-[192px] rounded-md":"" 
+               }cursor-pointer` }>
+                <SidebarItem text="Github" icon={<Github/>}>
+                </SidebarItem>
 
                </button>
                 

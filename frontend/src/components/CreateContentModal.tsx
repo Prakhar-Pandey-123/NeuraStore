@@ -7,7 +7,8 @@ import { CrossIcon } from "../icons/CrossIcon";
 
 enum ContentType{
     Youtube="youtube",
-    Twitter="twitter"
+    Twitter="twitter",
+    Github="github"
 }
 
 interface CreateContentModalProps{
@@ -40,12 +41,12 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                     <div>
                     <div className="w-screen h-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex justify-center ">
                     </div>
-                    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center">
+                    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center ">
                         <div className="flex flex-col justify-center">
-                            <span className="bg-white opacity-100 p-4 rounded fixed">
+                            <span className="bg-white opacity-100 p-4 rounded fixed rounded-lg">
                                 {/*close btn*/}
-                            <div className="flex justify-center">
-                                <div onClick={onClose} className="cursor-pointer">
+                            <div className="flex justify-center flex-end">
+                                <div onClick={onClose} className="cursor-pointer ml-auto  ">
                                     <CrossIcon></CrossIcon>
                                 </div>
                             </div>
@@ -58,7 +59,7 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                             </Input>
                             </div>
                             <div>
-                                <h1>Type</h1>
+                                <h1 className="font-semibold pl-1 pb-2 ">Type</h1>
                                 <div className="flex gap-1 justify-center pb-2">
                                 <Button text="Youtube"
                                     variant={type===ContentType.Youtube?"primary":"secondary"}
@@ -70,6 +71,9 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                                 variant={type===ContentType.Twitter?"primary":"secondary"}
                                 onClick={()=>setType(ContentType.Twitter)}
                                 >
+                                </Button>
+                                <Button text="Github" variant={type===ContentType.Github?"primary":"secondary"} onClick={()=>setType(ContentType.Github)}>
+
                                 </Button>
 
                                 </div>

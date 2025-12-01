@@ -38,7 +38,7 @@ const contentSchema=new mongoose.Schema({
     },
     type:{
         type:String,
-        enum:["youtube","twitter"],
+        enum:["youtube","twitter","github"],
         required:true
     },
     title:{type:String,required:true},

@@ -70,7 +70,9 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
 
                 {/* Content Section */}
                 <div className="pt-4 h-[1400px] overflow-hidden">
-                    {/* Render YouTube embed if type is "youtube" */}
+                    
+
+
                     {type === "youtube" && (
                         <div className="flex flex-col items-center text-xl">
                         <iframe
@@ -85,6 +87,9 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
                             allowFullScreen
                         ></iframe>
                         <div className="pt-4">{title}</div>
+                        <div className="text-base text-gray-600 pt-2">
+      
+    </div>
                         </div>
                     )}
 
@@ -94,6 +99,38 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
                             <a href={link.replace("x.com", "twitter.com")}></a>
                         </blockquote>
                     )}
+                  {type === "github" && (() => {
+  const url = link.trim();
+  const parts = url.replace("https://github.com/", "").split("/");
+  const username = parts[0];
+  const repo = parts[1];
+
+  const cardSrc = `https://github-readme-stats.vercel.app/api/pin/?username=${username}&repo=${repo}`;
+  const fallbackImg = "https://cdn-icons-png.flaticon.com/512/25/25231.png"; // GitHub logo PNG
+
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <img
+        src={cardSrc}
+        onError={(e) => (e.target.src = fallbackImg)}
+        style={{
+          width: "100%",
+          maxWidth: "200px",
+          border: "none",
+          borderRadius: "10px",
+          marginTop: "10px",
+          display: "block"
+        }}
+        alt="GitHub Repository"
+      />
+    <div style={{ marginTop: "10px" }}>
+      <strong>Owner:</strong> {username} <br />
+      <strong>Repo:</strong> {repo}
+    </div>
+    </a>
+  )
+})()
+    }
                 </div>
             </div>
         </div>

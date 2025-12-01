@@ -21,10 +21,9 @@ export function Dashboard(){
         refresh()
     },[modalOpen]);
 
-//            useEffect(() => {
-// console.log(show)
-//     window.location.reload();
-// }, [show]);
+           useEffect(() => {
+            refresh()
+}, [show]);
 
     return(
         <div>

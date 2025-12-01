@@ -7,8 +7,9 @@ import {BACKEND_URL} from "../config"
 
 
 export function Signup(){
+    const navigate=useNavigate();
 
-    const navigate=useNavigate()
+   
 const usernameRef=useRef<HTMLInputElement>(null)
 const passwordRef=useRef<HTMLInputElement>(null);
 
@@ -22,7 +23,7 @@ const passwordRef=useRef<HTMLInputElement>(null);
         password
        })
        navigate("/signin");
-       alert("you have signed up");
+       
 
         }
         catch(error:any){
@@ -43,8 +44,11 @@ const passwordRef=useRef<HTMLInputElement>(null);
                 <div className="flex justify-center pt-4">
 
                     <Button onClick={signup} loading={false} variant="primary" text="Signup" fullWidth={true}></Button>
-
                 </div>
+                <div className="pt-4">Already have an acocunt ? 
+                    <button className="text-blue-700 underline italic cursor-pointer pl-2" onClick={()=>navigate("/signin")}> Click me </button>
+                </div>
+               
             </div>
         </div>
     )

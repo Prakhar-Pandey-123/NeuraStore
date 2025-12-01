@@ -8,17 +8,28 @@ import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import axios from "axios"
 import { BACKEND_URL } from "../config";
+
+
 export function Dashboard(){
+    const [show,setShow]=useState("all");
+   
     const [modalOpen,setModalOpen]=useState(false);
     const {contents,refresh}=useContent()
+    
 
     useEffect(()=>{
         refresh()
     },[modalOpen]);
 
+//            useEffect(() => {
+// console.log(show)
+//     window.location.reload();
+// }, [show]);
+
     return(
         <div>
-            <Sidebar></Sidebar>
+            <Sidebar show ={show} setShow={setShow}></Sidebar>
+           
             <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
                 <CreateContentModal open={modalOpen} onClose={()=>setModalOpen(false)}></CreateContentModal>
 
@@ -35,24 +46,29 @@ export function Dashboard(){
                             "Authorization":localStorage.getItem("token")
                         }
                     })
-                    const shareUrl=`http://localhost:5173/share/${response.data.hash}`
-                    alert(shareUrl)
+                    const shareLink=`http://localhost:5173/brain/${response.data.hash}`
+                    
+                    alert(shareLink);
                 }} variant="secondary" text="Share brain" startIcon={<ShareIcon/>}>
-                </Button></div>
-                <div className="flex gap-4 flex-wrap">
-                    {
-                        contents.map(({type,link,title,_id})=>(
-                            <Card type={type}
-                                link={link}
-                                title={title}
-                                contentId={_id}
-                                key={_id}
-                                refresh={refresh}
-                            >
-                            </Card>
-                        ))
-                    }
+                </Button>
                 </div>
+                <div className="flex gap-4 flex-wrap">
+                    {contents
+    .filter(item => show === "all" ? true : item.type === show)
+    .map(({ type, link, title, _id }) => (
+      <Card
+        key={_id}
+        type={type}
+        link={link}
+        title={title}
+        contentId={_id}
+        refresh={refresh}
+      />
+    ))
+  }
+                 
+                </div>
+              
                 </div>
             </div>
        

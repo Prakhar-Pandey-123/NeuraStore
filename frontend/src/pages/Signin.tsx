@@ -23,8 +23,8 @@ const passwordRef=useRef<HTMLInputElement>(null);
 
        const jwt=response.data.token;
        localStorage.setItem("token",jwt);
-       navigate("/signin");
-       alert("you have logged in");
+       navigate("/");
+      
     }
 
     return(
@@ -40,6 +40,9 @@ const passwordRef=useRef<HTMLInputElement>(null);
 
                     <Button onClick={signin} loading={false} variant="primary" text="Sign In" fullWidth={true}></Button>
 
+                </div>
+                <div className="pt-4">Don't have any account ? 
+                    <button className="text-blue-700 underline italic cursor-pointer pl-2" onClick={()=>navigate("/signup")}> Click me </button>
                 </div>
             </div>
         </div>

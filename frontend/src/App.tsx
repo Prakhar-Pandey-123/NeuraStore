@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { Signup } from "./pages/Signup";
 import { BrowserRouter, Routes,Route } from "react-router-dom";
 import { Signin } from "./pages/Signin";
-import { useContent } from "./hooks/useContent";
-
+import {Home} from "./pages/Home"
+import { Content } from "./pages/Content";
 
 import { Dashboard } from "./pages/Dashboard";
 function App() {
-  const {refresh}=useContent()
+ 
 
   useEffect(() => {
   const script = document.createElement("script");
@@ -17,10 +17,6 @@ function App() {
   script.async = true;
   document.body.appendChild(script);
 }, []);
-
-// useEffect(()=>{
-//   refresh()
-// },[])
   
   return(
     <BrowserRouter>
@@ -28,6 +24,11 @@ function App() {
       <Route path="/signup" element={<Signup/>}></Route>
       <Route path="/signin" element={<Signin/>}></Route>
       <Route path="/dashboard" element={<Dashboard/>}></Route>
+      <Route path="/" element={<Home/>}></Route>
+      <Route path="/brain/:hash"
+      element={<Content/>}
+      >
+      </Route>
 
     </Routes>
    
@@ -38,3 +39,4 @@ function App() {
 }
 
 export default App
+// axios.get("/api/v1/brain/123") // calls backend to fetch data... /api/v1 is for be only not for fe

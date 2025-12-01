@@ -257,7 +257,28 @@ app.post("/api/v1/brain/share",authMiddleware,async(req,res)=>{
     }
 
 })
-
+app.get("/api/v1/brain/:hash",async(req,res)=>{
+    const {hash}=req.params;
+    const link=await linkModel.findOne({hash});
+    if(!link){
+        return res.status(404).json({
+            success:false,
+            message:"link not found"
+        })
+    }
+    const content=await contentModel.find({userId:link.userId});
+    const user=await userModel.findOne({_id:link.userId});
+    if(!user || content.length===0){
+        return res.status(404).json({
+            success:false,
+            message:"user or content not found"
+        })
+    }
+    return res.status(200).json({
+        username:user.username,
+        content
+    }); 
+});
 
 
 app.listen(3000,()=>{

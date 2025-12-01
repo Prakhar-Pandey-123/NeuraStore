@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
-
+interface contentsInterface{
+    _id:string,
+    type:string,
+    link:string,
+    title:string
+}
 export function useContent(){
-    const [contents,setContents]=useState([]);
+    const [contents,setContents]=useState<contentsInterface[]>([]);
 
     // const refresh=useCallback(()=>{
     //     const token=localStorage.getItem("token")
@@ -23,15 +28,16 @@ export function useContent(){
             "Authorization":localStorage.getItem("token")
         }
        }).then((response)=>{
+        console.log("response of content apifrom fe",response.data.content);
         setContents(response.data.content);
        }).catch((error)=>{
         console.log("error in fetching content in fe",error)
        })
     }
 
-    useEffect(()=>{
-        refresh()
-    },[])
+    // useEffect(()=>{
+    //     refresh()
+    // },[])
 
     return {contents,refresh,setContents};
 }

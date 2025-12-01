@@ -1,4 +1,4 @@
-import {ShareIcon} from "../icons/ShareIcon"
+
 import { Text } from "../icons/Text"
 import { Delete } from "../icons/Delete"
 import axios from "axios"
@@ -7,9 +7,9 @@ import { Info } from "../icons/Info"
 interface CardProps {
     title: string; // Title of the card, e.g., video or tweet title
     link: string; // Link to the content (YouTube or Twitter)
-    type: "twitter" | "youtube"; // Type of the content
+    type: string; // Type of the content
     contentId:string;
-    refresh:()=>void
+    refresh?:()=>void
 }
 
 
@@ -36,6 +36,8 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
        }
 
     }
+
+
 
     return (
         <div>

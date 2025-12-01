@@ -1,20 +1,46 @@
 import {ShareIcon} from "../icons/ShareIcon"
 import { Text } from "../icons/Text"
 import { Delete } from "../icons/Delete"
-
-
+import axios from "axios"
+import { BACKEND_URL } from "../config"
+import { Info } from "../icons/Info"
 interface CardProps {
     title: string; // Title of the card, e.g., video or tweet title
     link: string; // Link to the content (YouTube or Twitter)
     type: "twitter" | "youtube"; // Type of the content
+    contentId:string;
+    refresh:()=>void
 }
 
+
+
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.
-export function Card({ title, link, type }: CardProps) {
+export function Card({ title, link, type,contentId,refresh}: CardProps) {
+
+    async function deleteit(){
+       try{
+         let response=await axios.post(`${BACKEND_URL}/api/v1/deleteContent`,{
+            id:contentId
+        },{
+            headers:{
+                Authorization:localStorage.getItem("token")
+            }
+        })
+        console.log(response); 
+        refresh();
+
+       }
+       catch(error){
+        console.log(error)
+        alert("error in fe in deleteit fn")
+       }
+
+    }
+
     return (
         <div>
             {/* Card Container */}
-            <div className="p-4 bg-white rounded-md border-gray-200 h-[400px] w-[300px]">
+            <div className="p-4 flex flex-col bg-white rounded-md border-gray-200 h-[350px] w-[300px]">
                 {/* Header Section max-w-72 border min-h-72 min-w-72*/}
                 <div className="flex justify-between">
                     {/* Left Section: Title with Icon */}
@@ -30,21 +56,21 @@ export function Card({ title, link, type }: CardProps) {
                         <div className="pr-2 text-gray-500">
                             {/* Clickable Share Icon that opens the link */}
                             <a href={link} target="_blank">
-                                <ShareIcon />
+                                <Info />
                             </a>
                         </div>
-                        <div className="text-gray-500">
+                        <button className="text-gray-500 cursor-pointer" onClick={deleteit}>
                             {/* Placeholder for another Share Icon */}
                             <Delete />
-                        </div>
+                        </button>
                     </div>
                 </div>
 
                 {/* Content Section */}
-                <div className="pt-4">
+                <div className="pt-4 h-[1400px] overflow-hidden">
                     {/* Render YouTube embed if type is "youtube" */}
                     {type === "youtube" && (
-                        <div>
+                        <div className="flex flex-col items-center text-xl">
                         <iframe
                             className="w-full"
                             src={link
@@ -56,7 +82,7 @@ export function Card({ title, link, type }: CardProps) {
                             referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen
                         ></iframe>
-                        <div>{title}</div>
+                        <div className="pt-4">{title}</div>
                         </div>
                     )}
 

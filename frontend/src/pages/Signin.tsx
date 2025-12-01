@@ -24,17 +24,17 @@ const passwordRef=useRef<HTMLInputElement>(null);
        const jwt=response.data.token;
        localStorage.setItem("token",jwt);
        navigate("/signin");
-       alert("you have signed up");
+       alert("you have logged in");
     }
 
     return(
         <div className="h-screen w-screen bg-gray-200 flex justify-center items-center">
             <div className="bg-white rounded-xl border min-w-48 p-8">
                 {/* input for username */}
-                <Input reference={usernameRef}
+                <Input ref={usernameRef}
                 placeholder="Username"></Input>
 
-                <Input reference={passwordRef} placeholder="Password"></Input>
+                <Input ref={passwordRef} placeholder="Password"></Input>
 
                 <div className="flex justify-center pt-4">
 

@@ -24,7 +24,7 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
         const title=titleRef.current?.value;
         const link=linkRef.current?.value;
 
-        await axios.post(`${BACKEND_URL}/api/v1/content`,{
+        await axios.post(`${BACKEND_URL}/api/v1/createContent`,{
             link,title,type
         },{
             headers:{
@@ -52,9 +52,9 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                             {/*input fields*/}
                             <div>
 
-                            <Input reference={titleRef} placeholder="Title"></Input>
+                            <Input ref={titleRef} placeholder="Title"></Input>
 
-                            <Input placeholder="Link" reference={linkRef}>
+                            <Input placeholder="Link" ref={linkRef}>
                             </Input>
                             </div>
                             <div>
@@ -64,6 +64,7 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                                     variant={type===ContentType.Youtube?"primary":"secondary"}
                                     onClick={()=>setType(ContentType.Youtube)}>
                                 </Button>
+                                
                                 <Button 
                                 text="Twitter"
                                 variant={type===ContentType.Twitter?"primary":"secondary"}

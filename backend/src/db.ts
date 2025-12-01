@@ -1,8 +1,9 @@
 import  express  from "express";
 import  mongoose  from "mongoose";
+
 export const connectDB=async()=>{
     try{
-        await mongoose.connect(process.env.MONGDB_URI as string);
+        await mongoose.connect(process.env.MONGODB_URI as string);
         console.log("db connected successfully")
     }
     catch(error){
@@ -10,6 +11,7 @@ export const connectDB=async()=>{
         process.exit(1);
     }
 }
+
 
 const userSchema=new mongoose.Schema({
     username:{
@@ -36,7 +38,7 @@ const contentSchema=new mongoose.Schema({
     },
     type:{
         type:String,
-        enum:["image","video","article","audio"],
+        enum:["youtube","twitter"],
         required:true
     },
     title:{type:String,required:true},

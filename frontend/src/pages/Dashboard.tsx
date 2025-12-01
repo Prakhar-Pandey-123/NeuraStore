@@ -38,13 +38,16 @@ export function Dashboard(){
                     const shareUrl=`http://localhost:5173/share/${response.data.hash}`
                     alert(shareUrl)
                 }} variant="secondary" text="Share brain" startIcon={<ShareIcon/>}>
-                </Button>
+                </Button></div>
                 <div className="flex gap-4 flex-wrap">
                     {
-                        contents.map(({type,link,title})=>(
+                        contents.map(({type,link,title,_id})=>(
                             <Card type={type}
                                 link={link}
                                 title={title}
+                                contentId={_id}
+                                key={_id}
+                                refresh={refresh}
                             >
                             </Card>
                         ))
@@ -52,7 +55,7 @@ export function Dashboard(){
                 </div>
                 </div>
             </div>
-        </div>
+       
     )
 
 }

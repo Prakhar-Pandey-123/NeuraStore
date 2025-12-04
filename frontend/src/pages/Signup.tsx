@@ -4,7 +4,7 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import axios from "axios";
 import {BACKEND_URL} from "../config"
-
+import toast from "react-hot-toast";
 
 export function Signup(){
     const navigate=useNavigate();
@@ -18,17 +18,17 @@ const passwordRef=useRef<HTMLInputElement>(null);
         // console.log(username.current);
         const password=passwordRef.current?.value;
         try{
-             await axios.post(BACKEND_URL+'/api/v1/signup',{
+           const response= await axios.post(BACKEND_URL+'/api/v1/signup',{
         username,
         password
        })
+       toast.success("Successfully Signed Up")
        navigate("/signin");
-       
-
         }
         catch(error:any){
+            toast.error("Error Signing Up")
             console.log(error)
-            alert(error)
+            // alert(error)
         }
     }
 

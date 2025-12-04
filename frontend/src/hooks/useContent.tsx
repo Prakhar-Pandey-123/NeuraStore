@@ -22,7 +22,6 @@ export function useContent(){
 
     function refresh(){
        axios.post(`${BACKEND_URL}/api/v1/getContent`,{
-
        },{
         headers:{
             "Authorization":localStorage.getItem("token")

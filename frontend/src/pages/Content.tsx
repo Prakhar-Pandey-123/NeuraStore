@@ -1,14 +1,18 @@
 import { useParams } from "react-router-dom"
-import {useState,useEffect} from "react"
+import {useEffect} from "react"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import {Card} from "../components/Card"
+import { Sidebar } from "../components/Sidebar";
+import {useState} from "react"
 
 export function Content(){
     const [content,setContent]=useState([]);
 const [username,setUsername]=useState(null);
       const {hash}=useParams()
         console.log("hash is",hash);
+
+        const [show,setShow]=useState("all");
 
     useEffect(()=> {
         async function getContent(){
@@ -24,6 +28,7 @@ const [username,setUsername]=useState(null);
   
     return(
         <div>
+          <Sidebar show={show} setShow={setShow}></Sidebar>
             <div className="w-max mx-auto text-2xl italic pt-4 pb-6 font-bold">You are seeing  {username} 's brain</div>
         <div className="flex gap-4 flex-wrap ">
             {content

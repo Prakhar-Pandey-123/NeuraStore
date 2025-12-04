@@ -32,7 +32,7 @@ export function Dashboard(){
             <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
                 <CreateContentModal open={modalOpen} onClose={()=>setModalOpen(false)}></CreateContentModal>
 
-                <div className="flex justify-end gap-4">
+                <div className="flex justify-end gap-4 pb-2">
                 {/* btn to open modal */}
                 <Button onClick={()=>setModalOpen(true)} variant="primary" text="Add Content" startIcon={<PlusIcon/>}></Button>
 
@@ -50,6 +50,7 @@ export function Dashboard(){
                     alert(shareLink);
                 }} variant="secondary" text="Share brain" startIcon={<ShareIcon/>}>
                 </Button>
+
                 </div>
                 <div className="flex gap-4 flex-wrap">
                     {contents

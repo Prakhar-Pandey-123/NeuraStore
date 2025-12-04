@@ -6,7 +6,8 @@ import { SidebarItem } from "./SidebarItem"
 import { useNavigate } from "react-router-dom"
 import { useContent } from "../hooks/useContent"
 import { Github } from "../icons/Github"
-
+// import { Others } from "../icons/Others"
+import { LinkIcon } from "../icons/LinkIcon"
 interface SidebarProps{
     show:string
     setShow:(value:string)=>void
@@ -59,9 +60,16 @@ export function Sidebar({show,setShow}:SidebarProps){
                 </SidebarItem>
 
                </button>
+
+               <button onClick={()=>clicked("others")} className={`${show==="others"?"bg-gray-200 w-[192px] rounded-md":""} cursor-pointer`}>
+                <SidebarItem text="Others" icon={<LinkIcon/>}>
+                </SidebarItem>
+                
+               </button>
                 
 
-            </div><div className="pl-2 pt-4">
+            </div>
+            <div className="pl-2 pt-4">
                <Button onClick={logout} variant="primary" text="Log Out">
 
                </Button>

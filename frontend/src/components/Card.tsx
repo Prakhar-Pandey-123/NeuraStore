@@ -4,6 +4,8 @@ import { Delete } from "../icons/Delete"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { Info } from "../icons/Info"
+import { Others } from "../icons/Others";
+
 interface CardProps {
     title: string; // Title of the card, e.g., video or tweet title
     link: string; // Link to the content (YouTube or Twitter)
@@ -17,6 +19,31 @@ interface CardProps {
 // The Card component represents a styled card that can display either a YouTube video or a Twitter embed based on the type prop.
 export function Card({ title, link, type,contentId,refresh}: CardProps) {
 
+
+    // const [open,setOpen]=useState(false);
+
+    function nthIndexOf(str:string,char:string,n:number):number{
+        console.log(link," this is others link ");
+        console.log("title is ",title);
+        console.log(type," type is ")
+        let index=-1;
+        for(let i=0;i<n;i++){
+            index=str.indexOf(char,index+1);
+        }
+       console.log("index ",index);
+        return index;
+       
+    }
+
+    async function updateit(){
+        try{
+
+            
+        }
+        catch(error){
+
+        }
+    }
     async function deleteit(){
        try{
          let response=await axios.post(`${BACKEND_URL}/api/v1/deleteContent`,{
@@ -43,12 +70,12 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
         <div>
             {/* Card Container */}
             <div className="p-4 flex flex-col bg-white rounded-md border-gray-200 h-[350px] w-[300px]">
-                {/* Header Section max-w-72 border min-h-72 min-w-72*/}
+               
                 <div className="flex justify-between">
                     {/* Left Section: Title with Icon */}
                     <div className="flex items-center text-md">
-                        <div className="text-gray-500 pr-2">
-                            {/* Share Icon preceding the title */}
+                        <div className="text-gray-500 pr-2" onClick={updateit}>
+                        
                             <Text />
                         </div>
                         {title}
@@ -57,7 +84,7 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
                     <div className="flex items-center">
                         <div className="pr-2 text-gray-500">
                             {/* Clickable Share Icon that opens the link */}
-                            <a href={link} target="_blank">
+                            <a href={link}>
                                 <Info />
                             </a>
                         </div>
@@ -68,8 +95,8 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
                     </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="pt-4 h-[1400px] overflow-hidden">
+                {/* Content Section  href={link} target="_blank"*/}
+                <div  className="pt-4 h-[1400px] overflow-hidden">
                     
 
 
@@ -130,6 +157,14 @@ export function Card({ title, link, type,contentId,refresh}: CardProps) {
     </a>
   )
 })()
+    }
+
+    {type==="others" &&(
+        <div className="pl-3 pt-9"> 
+        <Others websiteUrl={link.substring(0,nthIndexOf(link,"/",3))} />
+       
+        </div>
+    )
     }
                 </div>
             </div>

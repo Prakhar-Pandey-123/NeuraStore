@@ -8,7 +8,8 @@ import { CrossIcon } from "../icons/CrossIcon";
 enum ContentType{
     Youtube="youtube",
     Twitter="twitter",
-    Github="github"
+    Github="github",
+    Others="others"
 }
 
 interface CreateContentModalProps{
@@ -72,7 +73,14 @@ export function CreateContentModal({open,onClose}:CreateContentModalProps){
                                 onClick={()=>setType(ContentType.Twitter)}
                                 >
                                 </Button>
+
                                 <Button text="Github" variant={type===ContentType.Github?"primary":"secondary"} onClick={()=>setType(ContentType.Github)}>
+
+                                </Button>
+
+                                <Button text="Others" variant={type===ContentType.Others?"primary":"secondary"}
+                                onClick={()=>setType(ContentType.Others)}
+                                >
 
                                 </Button>
 

@@ -280,6 +280,41 @@ app.get("/api/v1/brain/:hash",async(req,res)=>{
     }); 
 });
 
+app.post("/api/v1/update",authMiddleware,async(req,res)=>{
+    try{
+        const {id,link,title,type}=req.body;
+    if(!id || !link || !title || !type ){
+        return res.status(404).json({
+            success:false,
+            message:"missing inputs "
+        }
+        )
+    }
+    const content=await contentModel.findByIdAndUpdate(id,{
+        link:link,
+        title:title,
+        type:type
+    },{new:true});
+    if(!content){
+        return res.status(404).json({
+            success:false,
+            message:"cant update the content"
+        })
+    }
+    return res.status(200).json({
+        success:true,
+        message:"updated content successfully",
+        content:content
+    })
+    }
+    catch(error){
+        console.log(error)
+         return res.status(500).json({
+        success:false,
+        message:"internal server error"
+    })
+    }
+})
 
 
 app.listen(3000,()=>{

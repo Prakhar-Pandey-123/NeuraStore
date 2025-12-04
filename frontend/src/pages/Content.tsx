@@ -13,7 +13,7 @@ const [username,setUsername]=useState(null);
         console.log("hash is",hash);
 
         const [show,setShow]=useState("all");
-
+// get all the content for that user
     useEffect(()=> {
         async function getContent(){
             const response =await axios.get(`${BACKEND_URL}/api/v1/brain/${hash}`);
